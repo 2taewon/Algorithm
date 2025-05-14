@@ -13,7 +13,7 @@ class Solution {
                 }
             list.add(s.charAt(i));
             }
-            s = Integer.toBinaryString(list.size());
+            s = Integer.toBinaryString(list.size()); //10진수 -> 2진수 변환 ex) 10 -> 1010
             list.removeAll(list);
             cnt++;
         }
