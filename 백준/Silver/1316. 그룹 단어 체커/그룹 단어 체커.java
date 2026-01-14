@@ -1,44 +1,32 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		String str;
-		int cnt = 0;
-		int s_cnt = 0;
-		int g_cnt = 0;
-		int select = 0;
-		while(select < N) {
-			str = sc.next();
-			if(str.length() == 1) {
-				cnt++;
-				select++;
-				continue;
-			}
-			for(int i = 0; i<str.length(); i++) {
-				for(int j = i+1; j<str.length(); j++) {
-					if(str.charAt(i) == str.charAt(j)) {
-						if(s_cnt == -1) {
-							g_cnt = -1;
-							break;
-						}
-					}
-					else if(str.charAt(i) != str.charAt(j)) {
-						s_cnt = -1;
-					}
-				}
-				s_cnt = 0;
-				if(g_cnt == -1) {
-					break;
-				}
-			}
-			if(g_cnt == 0) {
-				cnt++;
-			}
-			g_cnt = 0;
-			select++;
-		}
-		System.out.println(cnt);
-	}
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int result = 0;
+        for(int i = 0; i < n; i++) {
+            char[] chars = sc.next().toCharArray();
+
+            if (chars.length == 1) {
+                result += 1;
+                continue;
+            }
+
+            int[] arr = new int[26];
+            arr[chars[0] - 'a'] = 1;
+
+            for (int j = 1; j < chars.length; j++) {
+                if (chars[j - 1] != chars[j] && arr[chars[j] - 'a'] != 0) {
+                    break;
+                }
+                else if (j == chars.length - 1) {
+                    result += 1;
+                }
+                arr[chars[j] - 'a'] += 1;
+            }
+        }
+        System.out.println(result);
+    }
 }
